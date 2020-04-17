@@ -44,8 +44,7 @@ def test_display_page(unittest):
             params = {
                 'output': 'popup-content.children',
                 'changedPropIds': ['url.modified_timestamp'],
-                'inputs': [{'id': 'url', 'property': 'modified_timestamp'}],
-                'state': [pathname, {'id': 'url', 'property': 'search', 'value': None}]
+                'inputs': [pathname, {'id': 'url', 'property': 'search', 'value': None}]
             }
             response = c.post('/charts/_dash-update-component', json=params)
             resp_data = response.get_json()['response']
@@ -653,8 +652,7 @@ def test_chart_building_bar_and_popup(unittest):
             response = c.post('/charts/_dash-update-component', json={
                 'output': 'popup-content.children',
                 'changedPropIds': ['url.modified_timestamp'],
-                'inputs': [{'id': 'url', 'property': 'modified_timestamp'}],
-                'state': [
+                'inputs': [
                     {'id': 'url', 'property': 'pathname', 'value': pathname_val},
                     {'id': 'url', 'property': 'search', 'value': '?{}'.format(search_val)}
                 ]
@@ -1233,15 +1231,15 @@ def test_build_spaced_ticks(unittest):
 
 @pytest.mark.unit
 def test_wordcloud():
-    with pytest.raises(Exception) as error:
+    with pytest.raises(TypeError) as error:
         Wordcloud('foo', {}, y='b', invalid_arg='blah')
-    assert str(error).endswith(
-        'TypeError: The `Wordcloud` component with the ID "foo" received an unexpected keyword argument: `invalid_arg`'
-    )
+    assert (
+        'The `Wordcloud` component with the ID "foo" received an unexpected keyword argument: `invalid_arg`'
+    ) in str(error)
 
-    with pytest.raises(Exception) as error:
+    with pytest.raises(TypeError) as error:
         Wordcloud(data={}, y='b', invalid_arg='blah')
-    assert str(error).endswith('TypeError: Required argument `id` was not specified.')
+    assert 'Required argument `id` was not specified.' in str(error)
 
 
 @pytest.mark.unit

@@ -182,7 +182,7 @@ jobs:
   build_3_8:
     working_directory: ~/man-group/dtale_3_8
     docker:
-      - image: circleci/python:3.8-stretch-node-browsers
+      - image: circleci/python:3.8-rc-stretch-node-browsers
     <<: *defaults
 workflows:
   version: 2

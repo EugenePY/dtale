@@ -83,7 +83,7 @@ setup(
         'tests': [
             "ipython",
             "mock",
-            "pytest==4.6.4",
+            "pytest",
             "pytest-cov",
             "pytest-server-fixtures",
         ]
